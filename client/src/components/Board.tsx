@@ -12,8 +12,10 @@ const Board: React.FC<BoardProps> = ({ column }) => {
       <h2>{column}</h2>
     </div>
       <div className={styles.cardContainer}>
-        <div className={styles.card}>sdasd</div>
+        <div className={styles.card} draggable>sdasd</div>
+        <button className={styles.addButton}>+</button>
       </div>
+
     </div>
   );
 };

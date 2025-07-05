@@ -152,6 +152,8 @@ table {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  font-size: 16px;
+  color: #374151;
 }
 
 body {
@@ -160,6 +162,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  box-sizing: border-box;
+
   /*
   background-image: url("./assets/image.png");
   background-size: cover;
@@ -167,5 +171,10 @@ body {
   background-repeat: no-repeat;
   */
 
-  background-color: white;
+  background-color: rgb(206, 215, 230);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
