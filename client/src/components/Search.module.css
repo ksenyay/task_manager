@@ -18,7 +18,12 @@
   padding: 0 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   color: #6b7280;
+  font-family: "Nunito", sans-serif;
   font-size: 16px;
+}
+
+.search input:focus {
+  outline: 1px solid #cce5ff;
 }
 
 .search input::placeholder {
@@ -38,7 +43,8 @@
   cursor: pointer;
   font-size: 15px;
   font-weight: 600;
-  color: #88bffb;
+  color: #82bbf8;
+  font-family: "Nunito", sans-serif;
 }
 
 .search button:hover {

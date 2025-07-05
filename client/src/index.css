@@ -1,6 +1,7 @@
 /* FONTS */
 
 @import url("https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 .bitcount-grid-double {
   font-family: "Bitcount Grid Double", system-ui;
@@ -12,6 +13,13 @@
     "CRSV" 0.5,
     "ELSH" 0,
     "ELXP" 0;
+}
+
+.nunito {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* CSS RESET */
@@ -154,6 +162,7 @@ table {
   font-weight: 400;
   font-size: 16px;
   color: #374151;
+  font-family: "Nunito", sans-serif;
 }
 
 body {
