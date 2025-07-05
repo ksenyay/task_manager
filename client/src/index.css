@@ -1,3 +1,19 @@
+/* FONTS */
+
+@import url("https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap");
+
+.bitcount-grid-double {
+  font-family: "Bitcount Grid Double", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0.5,
+    "ELSH" 0,
+    "ELXP" 0;
+}
+
 /* CSS RESET */
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -144,5 +160,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #f9f9f9;
+  /*
+  background-image: url("./assets/image.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  */
+
+  background-color: white;
 }

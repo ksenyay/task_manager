@@ -14,25 +14,52 @@
     "todo inprocess done";
 
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 80px minmax(300px, 600px);
+  grid-template-rows: 80px minmax(300px, 550px);
   gap: 20px;
 }
 
 .gridContainer > * {
-  border: 1px solid green;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
 }
+
 .search {
   grid-area: search;
 }
 
 .todo {
   grid-area: todo;
+  border: 2px solid #ffcccc;
 }
 
 .inprocess {
   grid-area: inprocess;
+  border: 2px solid #fff9cc;
 }
 
 .done {
   grid-area: done;
+  border: 2px solid #ccffcc;
+}
+
+.todo h2,
+.inprocess h2,
+.done h2 {
+  background-color: rgb(235, 227, 243);
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
+  padding: 25px;
+  font-size: 1.4em;
+  font-family: "Bitcount Grid Double", system-ui;
+}
+
+.todo h2 {
+  background-color: #ffcccc;
+}
+
+.done h2 {
+  background-color: #ccffcc;
+}
+.inprocess h2 {
+  background-color: #fff9cc;
 }

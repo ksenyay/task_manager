@@ -1,10 +1,12 @@
+import React from 'react';
+import styles from './Search.module.css'
 
-function Search() {
+const Search: React.FC = () => {
   return (
     <>
-        <h1>Search Bar</h1>
+       <div className={styles.search}></div>
     </>
   );
-}
+};
 
 export default Search;
