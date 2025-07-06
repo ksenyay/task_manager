@@ -9,11 +9,12 @@
   display: grid;
 
   grid-template-areas:
+    "heading heading heading"
     "search search search"
     "todo inprocess done";
 
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 80px minmax(300px, 550px);
+  grid-template-rows: auto 80px minmax(300px, 550px);
   gap: 20px;
 }
 
@@ -40,6 +41,19 @@
 .done {
   grid-area: done;
   border: 3px solid #ccffcc;
+}
+
+.heading {
+  box-shadow: none;
+  border-radius: 0;
+  grid-area: heading;
+  color: #4b5563;
+  margin-bottom: 10px;
+}
+
+.heading h1 {
+  font-family: "Bitcount Grid Double", system-ui;
+  font-size: 3em;
 }
 
 .todo h2,
