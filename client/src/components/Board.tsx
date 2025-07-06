@@ -1,24 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Board.module.css'
+import Card from './Card'
+import AddTask from './forms/AddTask'
 
 interface BoardProps {
   column: string;
 }
 
-const tasks: { title: string; description: string; id: number }[] = [
-  {
-    title: 'title',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, doloribus enim esse ad illo expl.',
-    id: 1
-  },
-  {
-    title: 'title',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, doloribus enim esse ad illo expl.',
-    id: 2
-  }
-];
-
 const Board: React.FC<BoardProps> = ({ column }) => {
+  const [showDialog, setShowDialog] = useState(false);
+
+  const handleOpen = () => setShowDialog(true);
+  const handleClose = () => setShowDialog(false);
+
   return (
     <div className={styles.board}>
       <div className={styles.header}>
@@ -26,17 +20,15 @@ const Board: React.FC<BoardProps> = ({ column }) => {
       </div>
       <div className={styles.cardScroll}>
         <div className={styles.cardContainer}>
-          {tasks.map((item) => (
-            <div className={styles.card} key={item.id} draggable>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              <div className={styles.iconContainer}><img className={styles.icon} src="edit.png" alt="" /><img className={styles.icon} src="delete.png" alt="" /></div>
-            </div>
-          ))}
+          <Card />
           <div>
-          <button className={styles.addButton}>+</button>
+            <button className={styles.addButton} onClick={handleOpen}>+</button>
           </div>
 
+          {/* Task Dialog */}
+          {showDialog && (
+            <AddTask handleClose={handleClose} />
+          )}
         </div>
       </div>
     </div>
