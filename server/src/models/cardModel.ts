@@ -1,4 +1,4 @@
-import { Schema, model, Document } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
 interface CardDocument extends Document {
   id: string;
@@ -38,5 +38,5 @@ const cardSchema = new Schema<CardDocument>({
     },
 });
 
-const CardModel = model<CardDocument>('Cards', cardSchema);
-export default CardModel;
+const Card = mongoose.model<CardDocument>('Cards', cardSchema);
+export default Card;

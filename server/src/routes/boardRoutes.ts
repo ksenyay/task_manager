@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import * as boardController from '../controllers/boardController';
+import { getAllBoards, addBoard, getBoardById, updateBoard, deleteBoard } from '../controllers/boardController';
 
 const router = Router();
 
-router.get('/', boardController.getAllBoards);
-router.post('/', boardController.addBoard);
-router.get('/:boardId', boardController.getBoardById);
-router.patch('/:boardId', boardController.updateBoard);
-router.delete('/:boardId', boardController.deleteBoard);
+router.get('/', getAllBoards);
+router.post('/', addBoard);
+router.get('/:boardId', getBoardById);
+router.patch('/:boardId', updateBoard);
+router.delete('/:boardId', deleteBoard);
 
 export default router;

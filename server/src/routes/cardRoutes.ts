@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import * as cardController from '../controllers/cardController';
+import { createCard, getCardsByBoard, updateCard, deleteCard,moveCard } from '../controllers/cardController';
 
 const router = Router();
 
-router.post('/', cardController.createCard);
-router.get('/board/:boardId', cardController.getCardsByBoard);
-router.patch('/:id', cardController.updateCard);
-router.delete('/:id', cardController.deleteCard);
-router.patch('/:id/move', cardController.moveCard);
+router.post('/', createCard);
+router.get('/board/:boardId', getCardsByBoard);
+router.patch('/:id', updateCard);
+router.delete('/:id', deleteCard);
+router.patch('/:id/move', moveCard);
 
 export default router;

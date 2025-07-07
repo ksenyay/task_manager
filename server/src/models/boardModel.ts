@@ -23,5 +23,5 @@ const boardSchema = new Schema<BoardDocument>({
   },
 });
 
-const BoardModel = mongoose.model<BoardDocument>('Boards', boardSchema);
-export default BoardModel;
+const Board = mongoose.model<BoardDocument>('Boards', boardSchema);
+export default Board;
