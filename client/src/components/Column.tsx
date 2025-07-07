@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import styles from './Board.module.css'
+import styles from './Column.module.css'
 import Card from './Card'
 import AddTask from './forms/AddTask'
 
-interface BoardProps {
+interface ColumnProps {
   column: string;
 }
 
-const Board: React.FC<BoardProps> = ({ column }) => {
+const Column: React.FC<ColumnProps> = ({ column }) => {
   const [showDialog, setShowDialog] = useState(false);
 
   const handleOpen = () => setShowDialog(true);
@@ -35,4 +35,4 @@ const Board: React.FC<BoardProps> = ({ column }) => {
   );
 };
 
-export default Board;
+export default Column;

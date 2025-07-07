@@ -1,6 +1,5 @@
-
-import './App.css'
-import Board from './components/Board'
+import './styles/App.css'
+import Column from './components/Column'
 import Search from './components/Search';
 
 function App() {
@@ -9,11 +8,10 @@ function App() {
       <div className='heading'>
          <h1>Daily Tasks</h1>
       </div>
-     
       <div className="search"><Search /></div>
-      <div className="todo"><Board column="To Do" /></div>
-      <div className="inprocess"><Board column="In Process" /></div>
-      <div className="done"><Board column="Done" /></div>
+      <div className="todo"><Column column="To Do" /></div>
+      <div className="inprocess"><Column column="In Progress" /></div>
+      <div className="done"><Column column="Done" /></div>
     </div>
   );
 }

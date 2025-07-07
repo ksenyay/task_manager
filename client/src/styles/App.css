@@ -31,16 +31,19 @@
 .todo {
   grid-area: todo;
   border: 3px solid #ffcccc;
+  background-color: #f8f8f8;
 }
 
 .inprocess {
   grid-area: inprocess;
   border: 3px solid #fff9cc;
+  background-color: #f8f8f8;
 }
 
 .done {
   grid-area: done;
   border: 3px solid #ccffcc;
+  background-color: #f8f8f8;
 }
 
 .heading {
