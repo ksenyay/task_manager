@@ -9,7 +9,7 @@ async function getAllBoards(req: Request, res: Response): Promise<any>  {
       return res.status(404).json({ message: 'No boards found' });
     }
 
-    res.json(boards)
+    res.status(200).json(boards)
 
   } catch(err) {
     console.error(err);
@@ -45,7 +45,7 @@ async function getBoardById(req: Request, res: Response): Promise<any> {
         return res.status(404).json({ message: 'Board not found' });
     }
 
-    res.json(board)
+    res.status(200).json(board)
   } catch(err) {
       console.error(err);
       res.status(500).json({ message: 'Server error' });
@@ -59,8 +59,7 @@ async function updateBoard(req: Request, res: Response): Promise<any> {
 
     const updatedBoard = await Board.findByIdAndUpdate(
       boardId,
-      updateData,
-      { new: true, runValidators: true }  // return updated doc & validate updates
+      updateData, { new: true, runValidators: true }
     );
 
     if (!updatedBoard) {

@@ -34,8 +34,9 @@ const cardSchema = new Schema<CardDocument>({
   },
   position: { 
     type: Number, 
-    required: true 
-    },
+    required: true,
+    default: 0
+  },
 });
 
 const Card = mongoose.model<CardDocument>('Cards', cardSchema);

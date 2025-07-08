@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "app.ts",
   "scripts": {
-    "dev": "ts-node-dev --respawn src/app.ts"
+    "dev": "ts-node-dev --respawn src/app.ts",
+    "start": "ts-node src/app.ts"
   },
   "author": "",
   "license": "ISC",
