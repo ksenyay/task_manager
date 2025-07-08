@@ -11,7 +11,7 @@
   grid-template-areas:
     "heading heading heading"
     "search search search"
-    "todo inprocess done";
+    "todo inprogress done";
 
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto 80px minmax(300px, 550px);
@@ -34,8 +34,8 @@
   background-color: #f8f8f8;
 }
 
-.inprocess {
-  grid-area: inprocess;
+.inprogress {
+  grid-area: inprogress;
   border: 3px solid #fff9cc;
   background-color: #f8f8f8;
 }
@@ -60,7 +60,7 @@
 }
 
 .todo h2,
-.inprocess h2,
+.inprogress h2,
 .done h2 {
   background-color: rgb(235, 227, 243);
   border-top-left-radius: 9px;
@@ -79,6 +79,7 @@
 .done h2 {
   background-color: #ccffcc;
 }
-.inprocess h2 {
+
+.inprogress h2 {
   background-color: #fff9cc;
 }

@@ -1,44 +1,50 @@
-import styles from './Card.module.css';
 import { useState } from 'react';
 import EditTask from './forms/EditTask';
+import styles from './Card.module.css';
 
-const tasks: { title: string; description: string; id: number }[] = [
-  {
-    title: 'title',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, doloribus enim esse ad illo expl.',
-    id: 1
-  },
-  {
-    title: 'title',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, doloribus enim esse ad illo expl.',
-    id: 2
-  }
-];
+import type { Task } from '../types';
+import { useDraggable } from '@dnd-kit/core';
 
+type TaskCardProps = {
+  task: Task;
+  isOverlay?: boolean; 
+};
 
-function Card() {
-    const [showEditDialog, setShowEditDialog] = useState(false);
+function Card({ task, isOverlay = false }: TaskCardProps) {
+  const [showEditDialog, setShowEditDialog] = useState(false);
+  const handleOpenEdit = () => setShowEditDialog(true);
+  const handleCloseEdit = () => setShowEditDialog(false);
 
-    const handleOpenEdit = () => setShowEditDialog(true);
-    const handleCloseEdit = () => setShowEditDialog(false);
-    
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+    id: task.id,
+    enabled: !isOverlay,
+  });
+
   return (
     <>
-      {tasks.map((item) => (
-        <div className={styles.card} key={item.id} draggable>
-          <h3>{item.title}</h3>
-          <p>{item.description}</p>
-          <div className={styles.iconContainer}>
-            <img className={styles.icon} onClick={handleOpenEdit} src="edit.png" alt="edit icon" />
-            <img className={styles.icon} src="delete.png" alt="delete icon" />
-          </div>
+      <div
+        ref={setNodeRef}
+        {...(!isOverlay ? listeners : {})}
+        {...(!isOverlay ? attributes : {})}
+        className={`${styles.card} ${isDragging ? styles.dragging : ''} ${isOverlay && isDragging ? styles.dragOverlay : ''}`}
+      >
+        <h3>{task.title}</h3>
+        <p>{task.description}</p>
+        <div className={styles.iconContainer}>
+          <img
+            className={styles.icon}
+            onClick={handleOpenEdit}
+            onPointerDown={e => e.stopPropagation()}
+            src="edit.png"
+            alt="edit icon"
+          />
+          <img className={styles.icon} src="delete.png" alt="delete icon" />
         </div>
-      ))}
-        {/* Edit Dialog */}
-        {showEditDialog && (
-            <EditTask handleCloseEdit={handleCloseEdit} />
-        )}
+      </div>
+
+      {showEditDialog && <EditTask handleCloseEdit={handleCloseEdit} />}
     </>
   );
 }
-export default Card
+
+export default Card;
