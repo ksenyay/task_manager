@@ -11,3 +11,10 @@ export type Column = {
   id: TaskStatus;
   title: string;
 };
+
+export interface Board {
+  _id: string;     // MongoDB ID
+  id: string;      // Your custom public ID
+  name: string;
+  columns: string[];
+}

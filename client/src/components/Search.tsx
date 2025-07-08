@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import EditBoards from './forms/EditBoards'
+import EditBoards from './EditBoards'
 import styles from './Search.module.css'
 
 const Search: React.FC = () => {

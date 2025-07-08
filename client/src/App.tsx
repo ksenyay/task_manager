@@ -1,11 +1,13 @@
 import './styles/App.css';
 import Column from './components/Column';
 import Search from './components/Search';
-import { useState } from 'react';
-
+import {  useState } from 'react';
 import type { Task, Column as ColumnType } from './types';
 import { DndContext, DragOverlay, type DragEndEvent, type DragStartEvent } from '@dnd-kit/core';
 import Card from './components/Card'; 
+/*import type { RootState, AppDispatch } from './state/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchBoards } from './state/boards/boardSlice';*/
 
 const COLUMNS: ColumnType[] = [
   { id: 'todo', title: 'To Do' },
