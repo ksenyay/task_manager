@@ -15,19 +15,21 @@ function Card({ task, isOverlay = false }: TaskCardProps) {
   const handleOpenEdit = () => setShowEditDialog(true);
   const handleCloseEdit = () => setShowEditDialog(false);
 
-  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
-    id: task.id,
-    enabled: !isOverlay,
-  });
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    isDragging,
+  } = useDraggable({ id: task.id });
 
   return (
     <>
-      <div
-        ref={setNodeRef}
-        {...(!isOverlay ? listeners : {})}
-        {...(!isOverlay ? attributes : {})}
-        className={`${styles.card} ${isDragging ? styles.dragging : ''} ${isOverlay && isDragging ? styles.dragOverlay : ''}`}
-      >
+        <div
+          ref={setNodeRef}
+          {...(!isOverlay ? listeners : {})}
+          {...(!isOverlay ? attributes : {})}
+          className={`${styles.card} ${isDragging ? styles.dragging : ''} ${isOverlay && isDragging ? styles.dragOverlay : ''}`}
+        >
         <h3>{task.title}</h3>
         <p>{task.description}</p>
         <div className={styles.iconContainer}>
