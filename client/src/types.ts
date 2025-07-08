@@ -13,8 +13,8 @@ export type Column = {
 };
 
 export interface Board {
-  _id: string;     // MongoDB ID
-  id: string;      // Your custom public ID
+  _id: string;     
+  id: string;      
   name: string;
   columns: string[];
 }
