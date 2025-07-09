@@ -78,7 +78,21 @@ async function deleteCard(req: Request, res: Response): Promise<any> {
 }
 
 async function moveCard(req: Request, res: Response): Promise<any> {
-  return
+  const { id } = req.params;
+  const { column } = req.body;
+
+  try {
+    const updatedCard = await Card.findByIdAndUpdate(
+      id,
+      { column },
+      { new: true } 
+    );
+
+    res.status(200).json(updatedCard);
+  } catch (error) {
+    console.error('Error moving card:', error);
+    res.status(500).json({ message: 'Internal server error.' });
+  }
 }
 
 export {
