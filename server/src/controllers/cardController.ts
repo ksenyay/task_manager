@@ -70,7 +70,7 @@ async function deleteCard(req: Request, res: Response): Promise<any> {
       return res.status(404).json({ message: 'Card not found' });
     }
 
-    res.status(200).json({ message: 'Card deleted successfully' });
+    res.status(200).json(deletedCard);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Error deleting card' });
