@@ -18,3 +18,11 @@ export interface Board {
   name: string;
   columns: string[];
 }
+
+export interface TaskCard {
+  _id: string;  
+  boardId: string;
+  title: string;
+  description: string;
+  column: 'To Do' | 'In Progress' | 'Done';
+}

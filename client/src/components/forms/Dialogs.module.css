@@ -120,6 +120,7 @@
 .addBoard {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 10px;
   margin-bottom: 15px;
 }
@@ -130,4 +131,8 @@
 
 .addBoard button {
   width: 70px;
+}
+
+.closeBtn {
+  width: 300px !important;
 }

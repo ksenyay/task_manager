@@ -71,8 +71,7 @@ return (
                 )}
             
                 <div className={styles.dialogActions}>
-                    <button onClick={handleCloseBoard}>Cancel</button>
-                    <button>Save</button>
+                    <button className={styles.closeBtn} onClick={handleCloseBoard}>Close</button>
                 </div>
             </div>
         </div>
