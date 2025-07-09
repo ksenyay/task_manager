@@ -19,9 +19,8 @@ export const fetchTasksById = createAsyncThunk(
 
 export const deleteCard = createAsyncThunk(
   'tasks/delete',
-  async (id: string) => {
-    const deleted = await deleteTask(id);
-    return deleted;
+  (id: string) => {
+    return deleteTask(id);
   }
 );
 

@@ -32,6 +32,8 @@
   color: #4b5563;
   text-align: start;
   flex: 1;
+  font-size: 1.1em;
+  line-height: 1.2;
 }
 
 .card:hover {

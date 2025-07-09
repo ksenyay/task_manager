@@ -37,7 +37,7 @@ export function Column({ column, tasks }: ColumnProps) {
               <button className={styles.addButton} onClick={handleOpen}>+</button>
             )}
           </div>
-          {showDialog && <AddTask handleClose={handleClose} />}
+          {showDialog && <AddTask handleClose={handleClose} columnId={column.id} />}
         </div>
       </div>
     </div>

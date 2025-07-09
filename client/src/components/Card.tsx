@@ -4,6 +4,9 @@ import styles from './Card.module.css';
 
 import type { TaskCard } from '../types';
 import { useDraggable } from '@dnd-kit/core';
+import { deleteCard } from '../state/tasksSlice';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '../state/store';
 
 type TaskCardProps = {
   task: TaskCard;
@@ -14,6 +17,16 @@ function Card({ task, isOverlay = false }: TaskCardProps) {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const handleOpenEdit = () => setShowEditDialog(true);
   const handleCloseEdit = () => setShowEditDialog(false);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  function handleOpenDelete(e: React.MouseEvent) {
+    e.stopPropagation();
+    const userConfirmed = confirm("Are you sure you want to delete this task?");
+    if (userConfirmed) {
+      dispatch(deleteCard(task._id));
+    }
+  }
 
   const {
     attributes,
@@ -40,11 +53,15 @@ function Card({ task, isOverlay = false }: TaskCardProps) {
             src="edit.png"
             alt="edit icon"
           />
-          <img className={styles.icon} src="delete.png" alt="delete icon" />
+          <img className={styles.icon} 
+              src="delete.png"  
+              alt="delete icon"            
+              onClick={handleOpenDelete}
+              onPointerDown={e => e.stopPropagation()}/>
         </div>
       </div>
 
-      {showEditDialog && <EditTask handleCloseEdit={handleCloseEdit} />}
+      {showEditDialog && <EditTask handleCloseEdit={handleCloseEdit}  taskData={{ _id: task._id, title: task.title, description: task.description }} />}
     </>
   );
 }

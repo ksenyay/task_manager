@@ -19,7 +19,6 @@ const COLUMNS: ColumnType[] = [
 function App() {
 
   // Tasks
-
   const [activeId, setActiveId] = useState<string | null>(null);
   const dispatch = useDispatch<AppDispatch>();
   const currentBoard = useSelector((state: RootState) => state.boards.currentBoard);

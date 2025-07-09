@@ -22,9 +22,13 @@ const EditBoards: React.FC<AddProps> = ({ handleCloseBoard }) => {
   }, [dispatch]);
 
   const deleteBoard = async (id: string) => {
+        const userConfirmed = confirm("Are you sure you want to delete this board?");
+        
         try {
-            await dispatch(removeBoard(id)).unwrap();
-            await dispatch(fetchBoards());
+            if (userConfirmed) {
+                await dispatch(removeBoard(id)).unwrap();
+                await dispatch(fetchBoards());
+            }  
         } catch (err) {
             console.error('Failed to delete board:', err);
         }

@@ -18,11 +18,11 @@ export async function getTasksByBoard(boardId: string): Promise<TaskCard[]> {
   return await res.json();
 }
 
-export async function deleteTask(taskId:string): Promise<TaskCard> {
+export async function deleteTask(taskId: string): Promise<TaskCard> {
   const res = await fetch(`${BASE_URL}/${taskId}`, {
     method: 'DELETE',
   });
-  if(!res.ok) throw new Error('Failed to delete task');
+  if (!res.ok) throw new Error('Failed to delete task');
   return await res.json();
 }
 
