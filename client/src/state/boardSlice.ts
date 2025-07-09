@@ -69,13 +69,13 @@ const boardsSlice = createSlice({
         state.boards.push(action.payload);
       })
       .addCase(removeBoard.fulfilled, (state, action) => {
-        state.boards = state.boards.filter(board => board._id !== action.payload);
-        if (state.currentBoard?._id === action.payload) {
+        state.boards = state.boards.filter(board => board.id !== action.payload);
+        if (state.currentBoard?.id === action.payload) {
           state.currentBoard = null;
         }
       })
       .addCase(patchBoard.fulfilled, (state, action) => {
-        const index = state.boards.findIndex(b => b.id === action.payload.id);
+        const index = state.boards.findIndex(board => board.id === action.payload.id);
         if (index !== -1) {
           state.boards[index] = action.payload;
         }

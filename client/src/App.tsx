@@ -1,13 +1,13 @@
 import './styles/App.css';
 import Column from './components/Column';
 import Search from './components/Search';
-import {  useState } from 'react';
+import {  useEffect, useState } from 'react';
 import type { Task, Column as ColumnType } from './types';
 import { DndContext, DragOverlay, type DragEndEvent, type DragStartEvent } from '@dnd-kit/core';
 import Card from './components/Card'; 
-/*import type { RootState, AppDispatch } from './state/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBoards } from './state/boards/boardSlice';*/
+import type { AppDispatch, RootState } from './state/store';
+import { fetchBoardById, fetchBoards, setCurrentBoard } from './state/boardSlice';
 
 const COLUMNS: ColumnType[] = [
   { id: 'todo', title: 'To Do' },
@@ -25,6 +25,31 @@ const INITIAL_TASKS: Task[] = [
 function App() {
   const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const dispatch = useDispatch<AppDispatch>();
+  const currentBoard = useSelector((state: RootState) => state.boards.currentBoard);
+
+  useEffect(() => {
+    const savedId = localStorage.getItem('defaultBoardId');
+
+    if (savedId) {
+      dispatch(fetchBoardById(savedId));
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      dispatch(fetchBoards()).then((res: any) => {
+        const allBoards = res.payload;
+        if (allBoards?.length > 0) {
+          const defaultBoard = allBoards[0];
+          dispatch(setCurrentBoard(defaultBoard));
+        }
+      });
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (currentBoard) {
+      localStorage.setItem('defaultBoardId', currentBoard.id);
+    }
+  }, [currentBoard]);
 
   function handleDragStart(event: DragStartEvent) {
     setActiveId(event.active.id as string);
@@ -51,7 +76,7 @@ function App() {
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className="gridContainer">
         <div className="heading">
-          <h1>Daily Tasks</h1>
+          <h1>{currentBoard?.name || 'Please load a board'}</h1>
         </div>
         <div className="search"><Search /></div>
 

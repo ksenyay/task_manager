@@ -37,7 +37,7 @@ const EditBoards: React.FC<AddProps> = ({ handleCloseBoard }) => {
       return;
     }
 
-     const id = uuidv4().slice(0, 6)
+    const id = uuidv4().slice(0, 6)
 
     console.log('Adding board with id:', id, 'and name:', trimmedName);
     dispatch(createBoard({ id, name: trimmedName }));
@@ -56,20 +56,19 @@ return (
                      />
                     <button onClick={addBoard}>Add</button>
                 </div>
-                {boards.map((board) => {
-                    return (
-                        <div key={board._id} className={styles.board}>
+                {boards.length === 0 ? (
+                    <p className={styles.noBoards}>You don't have any boards yet.</p>
+                ) : (
+                    boards.map((board) => (
+                        <div key={board.id} className={styles.board}>
                             <p>{board.name}: {board.id}</p>
                             <div className={styles.iconContainer}>
-                                <img className={styles.icon}
-                                    src="edit.png"
-                                    alt="edit icon"
-                                />
-                                <img className={styles.icon} onClick={() => deleteBoard(board._id)} src="delete.png" alt="delete icon" />
+                                <img className={styles.icon} src="edit.png" alt="edit icon" />
+                                <img className={styles.icon} onClick={() => deleteBoard(board.id)} src="delete.png" alt="delete icon" />
                             </div>
                         </div>
-                    )
-                })}
+                    ))
+                )}
             
                 <div className={styles.dialogActions}>
                     <button onClick={handleCloseBoard}>Cancel</button>
