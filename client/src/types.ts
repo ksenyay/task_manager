@@ -1,4 +1,4 @@
-export type TaskStatus = 'todo' | 'inprogress' | 'done';
+export type TaskStatus = 'todo' | 'inProgress' | 'done';
 
 export type Task = {
   id: string;
@@ -24,5 +24,5 @@ export interface TaskCard {
   boardId: string;
   title: string;
   description: string;
-  column: 'To Do' | 'In Progress' | 'Done';
+  column: 'todo' | 'inProgress' | 'done';
 }

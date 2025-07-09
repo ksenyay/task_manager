@@ -2,11 +2,11 @@ import { useState } from 'react';
 import EditTask from './forms/EditTask';
 import styles from './Card.module.css';
 
-import type { Task } from '../types';
+import type { TaskCard } from '../types';
 import { useDraggable } from '@dnd-kit/core';
 
 type TaskCardProps = {
-  task: Task;
+  task: TaskCard;
   isOverlay?: boolean; 
 };
 
@@ -20,7 +20,7 @@ function Card({ task, isOverlay = false }: TaskCardProps) {
     listeners,
     setNodeRef,
     isDragging,
-  } = useDraggable({ id: task.id });
+  } = useDraggable({ id: task._id });
 
   return (
     <>

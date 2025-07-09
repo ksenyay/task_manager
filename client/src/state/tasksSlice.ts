@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { TaskCard } from '../types';
-import { createTask, deleteTask, editTask, getTasksByBoard } from "../api/taskApi";
+import { changeColumn, createTask, deleteTask, editTask, getTasksByBoard } from "../api/taskApi";
 
 // Thunks
 export const addCard = createAsyncThunk(
@@ -32,6 +32,12 @@ export const editCard = createAsyncThunk(
   }
 );
 
+export const changeTaskColumn = createAsyncThunk(
+  'tasks/changeColumn', ({ id, column }: { id: string; column: string }) => {
+    return changeColumn(id, column)
+  }
+);
+
 interface TasksState {
   tasks: TaskCard[];
   loading: boolean;
@@ -47,7 +53,15 @@ const initialState: TasksState = {
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
-  reducers: {},
+  reducers: {
+    updateLocalColumn: (state, action) => {
+      const { id, column } = action.payload;
+      const task = state.tasks.find(task => task._id === id);
+      if (task) {
+        task.column = column;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       // Fetch tasks
@@ -107,8 +121,17 @@ const tasksSlice = createSlice({
       .addCase(editCard.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message ?? 'Failed to edit task';
-      });
-  },
+      })
+      
+      // Change column
+      .addCase(changeTaskColumn.fulfilled, (state, action) => {
+        const updated = action.payload;
+        const index = state.tasks.findIndex(task => task._id === updated._id);
+        if (index !== -1) {
+          state.tasks[index] = updated;
+        }
+      })
+    },
 });
 
 export default tasksSlice.reducer;

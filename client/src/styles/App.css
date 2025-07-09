@@ -34,7 +34,7 @@
   background-color: #f8f8f8;
 }
 
-.inprogress {
+.inProgress {
   grid-area: inprogress;
   border: 3px solid #fff9cc;
   background-color: #f8f8f8;
@@ -60,7 +60,7 @@
 }
 
 .todo h2,
-.inprogress h2,
+.inProgress h2,
 .done h2 {
   background-color: rgb(235, 227, 243);
   border-top-left-radius: 9px;
@@ -80,6 +80,6 @@
   background-color: #ccffcc;
 }
 
-.inprogress h2 {
+.inProgress h2 {
   background-color: #fff9cc;
 }

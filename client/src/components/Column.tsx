@@ -4,11 +4,13 @@ import Card from './Card';
 import AddTask from './forms/AddTask';
 
 import { useDroppable } from '@dnd-kit/core';
-import type { Column as ColumnType, Task } from '../types';
+import type { Column as ColumnType, TaskCard } from '../types';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../state/store';
 
 type ColumnProps = {
   column: ColumnType;
-  tasks: Task[];
+  tasks: TaskCard[];
 };
 
 export function Column({ column, tasks }: ColumnProps) {
@@ -18,6 +20,8 @@ export function Column({ column, tasks }: ColumnProps) {
 
   const { setNodeRef } = useDroppable({ id: column.id });
 
+  const boardSelected = useSelector((state: RootState) => !!state.boards.currentBoard);
+
   return (
     <div className={styles.board}>
       <div className={styles.header}>
@@ -26,10 +30,12 @@ export function Column({ column, tasks }: ColumnProps) {
       <div className={styles.cardScroll}>
         <div ref={setNodeRef} className={styles.cardContainer}>
           {tasks.map(task => (
-            <Card key={task.id} task={task} />
+            <Card key={task._id} task={task} />
           ))}
           <div>
-            <button className={styles.addButton} onClick={handleOpen}>+</button>
+            {boardSelected && (
+              <button className={styles.addButton} onClick={handleOpen}>+</button>
+            )}
           </div>
           {showDialog && <AddTask handleClose={handleClose} />}
         </div>
