@@ -39,7 +39,7 @@ async function addBoard(req: Request, res: Response): Promise<any> {
 async function getBoardById(req: Request, res: Response): Promise<any> {
   try {
     const boardId = req.params.boardId; 
-    const board = await Board.findById(boardId)
+    const board = await Board.findOne({ id: boardId });
 
     if (!board) {
         return res.status(404).json({ message: 'Board not found' });
