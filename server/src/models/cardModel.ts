@@ -5,16 +5,10 @@ interface CardDocument extends Document {
   boardId: string;
   title: string;
   description: string;
-  column: 'To Do' | 'In Progress' | 'Done';
-  position: number;
+  column: 'todo' | 'inProgress' | 'done';
 }
 
 const cardSchema = new Schema<CardDocument>({
-  id: { 
-    type: String, 
-    required: true, 
-    unique: true 
-    },
   boardId: { 
     type: String, 
     required: true 
@@ -29,13 +23,8 @@ const cardSchema = new Schema<CardDocument>({
     },
   column: {
     type: String,
-    enum: ['To Do', 'In Progress', 'Done'],
-    default: 'To Do',
-  },
-  position: { 
-    type: Number, 
-    required: true,
-    default: 0
+    enum: ['todo', 'inProgress', 'done'],
+    default: 'todo',
   },
 });
 
