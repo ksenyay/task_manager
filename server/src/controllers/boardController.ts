@@ -57,9 +57,10 @@ async function updateBoard(req: Request, res: Response): Promise<any> {
     const boardId = req.params.boardId;
     const updateData = req.body;
 
-    const updatedBoard = await Board.findByIdAndUpdate(
-      boardId,
-      updateData, { new: true, runValidators: true }
+    const updatedBoard = await Board.findOneAndUpdate(
+      { id: boardId },
+      updateData,
+      { new: true, runValidators: true }
     );
 
     if (!updatedBoard) {
@@ -77,7 +78,7 @@ async function deleteBoard(req: Request, res: Response): Promise<any> {
   try {
     const boardId = req.params.boardId;
 
-    const deletedBoard = await Board.findByIdAndDelete(boardId);
+    const deletedBoard = await Board.findOneAndDelete({ id: boardId });
 
     if (!deletedBoard) {
       return res.status(404).json({ message: 'Board not found' });
