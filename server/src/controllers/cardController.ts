@@ -3,13 +3,13 @@ import Card from '../models/cardModel';
 
 async function createCard(req: Request, res: Response): Promise<any> {
   try {
-    const { title, description, boardId } = req.body;
+    const { title, description, boardId,  column} = req.body;
 
-    if (!title || !description || !boardId) {
+    if (!title || !description || !boardId || !column) {
       return res.status(400).json({ message: "Missing data" });
     }
 
-    const newCard = new Card({ title, description, boardId });
+    const newCard = new Card({ title, description, boardId, column });
 
     await newCard.save();
 
@@ -41,7 +41,7 @@ async function getCardsByBoard(req: Request, res: Response): Promise<any> {
 async function updateCard(req: Request, res: Response): Promise<any> {
   try {
     const cardId = req.params.id; 
-    const updateData = req.body;
+    const updateData = req.body; // title, description
 
     const updatedCard = await Card.findByIdAndUpdate(
       cardId,
