@@ -1,7 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 interface CardDocument extends Document {
-  id: string;
   boardId: string;
   title: string;
   description: string;
