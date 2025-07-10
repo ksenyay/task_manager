@@ -24,8 +24,14 @@
 }
 
 .card h3 {
+  width: 270px;
+  height: 21px;
+  text-align: start;
   font-size: 1.3em;
   font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card p {
@@ -33,7 +39,14 @@
   text-align: start;
   flex: 1;
   font-size: 1.1em;
-  line-height: 1.2;
+  line-height: 1.13;
+  word-break: break-word;
+
+  height: 230px;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
 }
 
 .card:hover {

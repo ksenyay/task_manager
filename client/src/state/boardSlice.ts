@@ -1,42 +1,45 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import type { Board } from '../types';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import type { Board } from "../types";
 import {
   getAllBoards,
   addNewBoard,
   updateBoard,
   deleteBoard,
   getBoardById,
-} from '../api/boardApi';
+} from "../api/boardApi";
 
 // Thunks
-export const fetchBoards = createAsyncThunk('boards/fetchAll', async () => {
+export const fetchBoards = createAsyncThunk("boards/fetchAll", async () => {
   return await getAllBoards();
 });
 
-export const fetchBoardById = createAsyncThunk('boards/fetchById', async (id: string) => {
-  return await getBoardById(id);
-});
+export const fetchBoardById = createAsyncThunk(
+  "boards/fetchById",
+  async (id: string) => {
+    return await getBoardById(id);
+  },
+);
 
 export const createBoard = createAsyncThunk(
-  'boards/create',
+  "boards/create",
   async (board: { id: string; name: string }) => {
     return await addNewBoard(board);
-  }
+  },
 );
 
 export const patchBoard = createAsyncThunk(
-  'boards/update',
+  "boards/update",
   async ({ id, update }: { id: string; update: Partial<Board> }) => {
     return await updateBoard(id, update);
-  }
+  },
 );
 
 export const removeBoard = createAsyncThunk(
-  'boards/delete',
+  "boards/delete",
   async (id: string) => {
     await deleteBoard(id);
     return id;
-  }
+  },
 );
 
 interface BoardsState {
@@ -54,7 +57,7 @@ const initialState: BoardsState = {
 };
 
 const boardsSlice = createSlice({
-  name: 'boards',
+  name: "boards",
   initialState,
   reducers: {
     setCurrentBoard(state, action) {
@@ -77,7 +80,7 @@ const boardsSlice = createSlice({
       })
       .addCase(fetchBoards.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? 'Failed to fetch boards';
+        state.error = action.error.message ?? "Failed to fetch boards";
       })
 
       // Fetch board by id
@@ -91,7 +94,7 @@ const boardsSlice = createSlice({
       })
       .addCase(fetchBoardById.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? 'Failed to fetch board';
+        state.error = action.error.message ?? "Failed to fetch board";
       })
 
       // Create board
@@ -105,7 +108,7 @@ const boardsSlice = createSlice({
       })
       .addCase(createBoard.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? 'Failed to create board';
+        state.error = action.error.message ?? "Failed to create board";
       })
 
       // Update board
@@ -114,7 +117,9 @@ const boardsSlice = createSlice({
         state.error = null;
       })
       .addCase(patchBoard.fulfilled, (state, action) => {
-        const index = state.boards.findIndex(board => board.id === action.payload.id);
+        const index = state.boards.findIndex(
+          (board) => board.id === action.payload.id,
+        );
         if (index !== -1) {
           state.boards[index] = action.payload;
         }
@@ -125,7 +130,7 @@ const boardsSlice = createSlice({
       })
       .addCase(patchBoard.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? 'Failed to update board';
+        state.error = action.error.message ?? "Failed to update board";
       })
 
       // Delete board
@@ -134,7 +139,9 @@ const boardsSlice = createSlice({
         state.error = null;
       })
       .addCase(removeBoard.fulfilled, (state, action) => {
-        state.boards = state.boards.filter(board => board.id !== action.payload);
+        state.boards = state.boards.filter(
+          (board) => board.id !== action.payload,
+        );
         if (state.currentBoard?.id === action.payload) {
           state.currentBoard = null;
         }
@@ -142,7 +149,7 @@ const boardsSlice = createSlice({
       })
       .addCase(removeBoard.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? 'Failed to delete board';
+        state.error = action.error.message ?? "Failed to delete board";
       });
   },
 });

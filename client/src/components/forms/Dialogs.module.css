@@ -136,3 +136,10 @@
 .closeBtn {
   width: 300px !important;
 }
+
+.board p {
+  width: 230px;
+  overflow-y: hidden;
+  text-align: start;
+  word-break: break-word;
+}
