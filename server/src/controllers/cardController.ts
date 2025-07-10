@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
-import Card from '../models/cardModel';
+import { Request, Response } from "express";
+import Card from "../models/cardModel";
 
 async function createCard(req: Request, res: Response): Promise<any> {
   try {
-    const { title, description, boardId,  column} = req.body;
+    const { title, description, boardId, column } = req.body;
 
     if (!title || !description || !boardId || !column) {
       return res.status(400).json({ message: "Missing data" });
@@ -22,16 +22,15 @@ async function createCard(req: Request, res: Response): Promise<any> {
 
 async function getCardsByBoard(req: Request, res: Response): Promise<any> {
   try {
-    const id = req.params.boardId
+    const id = req.params.boardId;
 
-    const cards = await Card.find({ boardId: id })
+    const cards = await Card.find({ boardId: id });
 
     if (cards.length === 0) {
-      return res.status(404).json({ message: 'No boards found' });
+      return res.status(404).json({ message: "No boards found" });
     }
 
-    res.status(201).json(cards)
-
+    res.status(201).json(cards);
   } catch (err) {
     console.error(err);
     return res.status(500).send("Error fetching cards");
@@ -40,23 +39,22 @@ async function getCardsByBoard(req: Request, res: Response): Promise<any> {
 
 async function updateCard(req: Request, res: Response): Promise<any> {
   try {
-    const cardId = req.params.id; 
+    const cardId = req.params.id;
     const updateData = req.body; // title, description
 
-    const updatedCard = await Card.findByIdAndUpdate(
-      cardId,
-      updateData,
-      { new: true, runValidators: true }
-    );
+    const updatedCard = await Card.findByIdAndUpdate(cardId, updateData, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!updatedCard) {
-      return res.status(404).json({ message: 'Card not found' });
+      return res.status(404).json({ message: "Card not found" });
     }
 
     res.status(200).json(updatedCard);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error updating card' });
+    res.status(500).json({ message: "Error updating card" });
   }
 }
 
@@ -67,13 +65,13 @@ async function deleteCard(req: Request, res: Response): Promise<any> {
     const deletedCard = await Card.findByIdAndDelete(cardId);
 
     if (!deletedCard) {
-      return res.status(404).json({ message: 'Card not found' });
+      return res.status(404).json({ message: "Card not found" });
     }
 
     res.status(200).json(deletedCard);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error deleting card' });
+    res.status(500).json({ message: "Error deleting card" });
   }
 }
 
@@ -85,20 +83,14 @@ async function moveCard(req: Request, res: Response): Promise<any> {
     const updatedCard = await Card.findByIdAndUpdate(
       id,
       { column },
-      { new: true } 
+      { new: true },
     );
 
     res.status(200).json(updatedCard);
   } catch (error) {
-    console.error('Error moving card:', error);
-    res.status(500).json({ message: 'Internal server error.' });
+    console.error("Error moving card:", error);
+    res.status(500).json({ message: "Internal server error." });
   }
 }
 
-export {
-    createCard,
-    getCardsByBoard,
-    updateCard,
-    deleteCard,
-    moveCard,
-}
+export { createCard, getCardsByBoard, updateCard, deleteCard, moveCard };

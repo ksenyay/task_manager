@@ -1,19 +1,18 @@
-import { Request, Response } from 'express';
-import Board from '../models/boardModel'
+import { Request, Response } from "express";
+import Board from "../models/boardModel";
 
-async function getAllBoards(req: Request, res: Response): Promise<any>  {
+async function getAllBoards(req: Request, res: Response): Promise<any> {
   try {
-    const boards = await Board.find({})
+    const boards = await Board.find({});
 
-    if (boards.length === 0) {          
-      return res.status(404).json({ message: 'No boards found' });
+    if (boards.length === 0) {
+      return res.status(404).json({ message: "No boards found" });
     }
 
-    res.status(200).json(boards)
-
-  } catch(err) {
+    res.status(200).json(boards);
+  } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 }
 
@@ -29,7 +28,7 @@ async function addBoard(req: Request, res: Response): Promise<any> {
 
     await newBoard.save();
 
-    res.status(201).json(newBoard); 
+    res.status(201).json(newBoard);
   } catch (err) {
     console.error(err);
     return res.status(500).send("Error saving board");
@@ -38,17 +37,17 @@ async function addBoard(req: Request, res: Response): Promise<any> {
 
 async function getBoardById(req: Request, res: Response): Promise<any> {
   try {
-    const boardId = req.params.boardId; 
+    const boardId = req.params.boardId;
     const board = await Board.findOne({ id: boardId });
 
     if (!board) {
-        return res.status(404).json({ message: 'Board not found' });
+      return res.status(404).json({ message: "Board not found" });
     }
 
-    res.status(200).json(board)
-  } catch(err) {
-      console.error(err);
-      res.status(500).json({ message: 'Server error' });
+    res.status(200).json(board);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
   }
 }
 
@@ -60,17 +59,17 @@ async function updateBoard(req: Request, res: Response): Promise<any> {
     const updatedBoard = await Board.findOneAndUpdate(
       { id: boardId },
       updateData,
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     );
 
     if (!updatedBoard) {
-      return res.status(404).json({ message: 'Board not found' });
+      return res.status(404).json({ message: "Board not found" });
     }
 
-    res.status(200).json(updatedBoard); 
+    res.status(200).json(updatedBoard);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error updating board' });
+    res.status(500).json({ message: "Error updating board" });
   }
 }
 
@@ -81,13 +80,13 @@ async function deleteBoard(req: Request, res: Response): Promise<any> {
     const deletedBoard = await Board.findOneAndDelete({ id: boardId });
 
     if (!deletedBoard) {
-      return res.status(404).json({ message: 'Board not found' });
+      return res.status(404).json({ message: "Board not found" });
     }
 
-    res.status(200).json({ message: 'Board deleted successfully' });
+    res.status(200).json({ message: "Board deleted successfully" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error deleting board' });
+    res.status(500).json({ message: "Error deleting board" });
   }
 }
 

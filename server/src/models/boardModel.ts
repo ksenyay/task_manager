@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document } from "mongoose";
 
 interface BoardDocument extends Document {
   id: string;
@@ -19,9 +19,9 @@ const boardSchema = new Schema<BoardDocument>({
   },
   columns: {
     type: [String],
-    default: ['To Do', 'In Progress', 'Done'],
+    default: ["To Do", "In Progress", "Done"],
   },
 });
 
-const Board = mongoose.model<BoardDocument>('Boards', boardSchema);
+const Board = mongoose.model<BoardDocument>("Boards", boardSchema);
 export default Board;
